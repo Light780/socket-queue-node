@@ -1,7 +1,8 @@
-const lblOnline = document.getElementById('lblOnline')
-const lblOffline = document.getElementById('lblOffline')
-const txtMsg = document.getElementById('txtMsg')
-const btnSend = document.getElementById('btnSend')
+
+const lblOnline = document.querySelector('#lblOnline')
+const lblOffline = document.querySelector('#lblOffline')
+const txtMensaje = document.querySelector('#txtMsg')
+const btnEnviar = document.querySelector('#btnSend')
 
 // eslint-disable-next-line no-undef
 const socket = io()
@@ -12,21 +13,21 @@ socket.on('connect', () => {
 })
 
 socket.on('disconnect', () => {
-  lblOffline.style.display = 'inline'
   lblOnline.style.display = 'none'
+  lblOffline.style.display = 'inline'
 })
 
 socket.on('send-message', (payload) => {
   console.log(payload)
 })
 
-btnSend.addEventListener('click', () => {
-  const message = txtMsg.value
+btnEnviar.addEventListener('click', () => {
+  const message = txtMensaje.value
   const payload = {
     message,
     id: socket.id,
     date: new Date().getTime()
   }
-  txtMsg.value = ''
+
   socket.emit('send-message', payload)
 })

@@ -1,3 +1,7 @@
+import TicketControl from '../models/ticket-control.js'
+
+const ticketControl = new TicketControl()
+
 export const socketController = (socket) => {
   console.log('Client connected', socket.id)
 
