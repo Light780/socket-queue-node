@@ -1,2 +1,24 @@
+// HTML References
+const lblNewTicket = document.querySelector('#lblNewTicket')
+const btnCreate = document.querySelector('button')
 
-console.log('Nuevo Ticket HTML')
+// eslint-disable-next-line no-undef
+const socket = io()
+
+socket.on('connect', () => {
+  btnCreate.disabled = false
+})
+
+socket.on('disconnect', () => {
+  btnCreate.disabled = true
+})
+
+socket.on('ultimo-ticket', (ultimo) => {
+  lblNewTicket.innerText = 'Ticket ' + ultimo
+})
+
+btnCreate.addEventListener('click', () => {
+  socket.emit('next-ticket', null, (ticket) => {
+    lblNewTicket.innerText = ticket
+  })
+})
