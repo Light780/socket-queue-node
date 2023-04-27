@@ -3,7 +3,7 @@ const lblDesktop = document.querySelector('h1')
 const btnAttend = document.querySelector('button')
 const lblTicket = document.querySelector('small')
 const divAlert = document.querySelector('.alert')
-const lblPendings = document.querySelector('#lblPendientes')
+const lblPendings = document.querySelector('#lblPendings')
 
 const searchParams = new URLSearchParams(window.location.search)
 
@@ -32,16 +32,16 @@ socket.on('pending-tickets', (pendings) => {
   if (pendings === 0) {
     lblPendings.style.display = 'none'
   } else {
-    lblPendings.style.display = ''
+    lblPendings.style.display = 'block'
     lblPendings.innerText = pendings
   }
 })
 
 btnAttend.addEventListener('click', () => {
-  socket.emit('atender-ticket', { desktop }, ({ ok, ticket, msg }) => {
+  socket.emit('attend-ticket', { desktop }, ({ ok, ticket, msg }) => {
     if (!ok) {
       lblTicket.innerText = 'No one.'
-      divAlert.style.display = ''
+      divAlert.style.display = 'block'
       return
     }
 

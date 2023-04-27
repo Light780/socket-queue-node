@@ -13,7 +13,7 @@ socket.on('disconnect', () => {
   btnCreate.disabled = true
 })
 
-socket.on('ultimo-ticket', (ultimo) => {
+socket.on('last-ticket', (ultimo) => {
   lblNewTicket.innerText = 'Ticket ' + ultimo
 })
 

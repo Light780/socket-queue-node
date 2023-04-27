@@ -13,7 +13,7 @@ export const socketController = (socket) => {
     socket.broadcast.emit('pending-tickets', ticketControl.tickets.length)
   })
 
-  socket.on('atender-ticket', ({ desktop }, fn) => {
+  socket.on('attend-ticket', ({ desktop }, fn) => {
     if (!desktop) {
       return fn({
         ok: false,
